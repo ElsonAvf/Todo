@@ -1,22 +1,22 @@
 const data = localStorage;
 
 function addList (listObj) {
-  
+  data.setItem(listObj.title, JSON.stringify(listObj));
 };
 
 function getList (listName) {
-  
-};
+  return JSON.parse(data.getItem(listName));
+}
 
 function deleteList (listName) {
-  
+  data.removeItem(listName);
 };
 
 function addCell (cellObj, listName) {
-  const updatedList = JSON.parse(data.getItem(listName));
-  cellObj.index = list.length;
+  const updatedList = getList(listName);
+  cellObj.index = updatedList.length;
   
-  list.cellList.push(cellObj);
+  updatedList.cellList.push(cellObj);
   
   addList(updatedList);
 };
@@ -26,7 +26,8 @@ function getCell(cellIndex, listName) {
 };
 
 function deleteCell(cellIndex, listName) {
-  const updatedList = JSON.parse(data.getItem(listName));
+  const updatedList = data.getList(listName);
+  
   updatedList.cellList.splice(cellIndex, 1);
   
   addList(updatedList);
