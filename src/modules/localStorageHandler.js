@@ -22,19 +22,19 @@ export function addCell (listName, cellObj) {
 };
 
 export function getCell(listName, cellIndex) {
-  return JSON.parse(data.getItem(listName)).cellList[cellIndex]
+  return getList(listName).cellList[cellIndex]
 };
 
-export function doesThisCellExist (cellName, listName) {
+export function doesThisCellExist (listName, cellName) {
   for (let i = 0; i < getList(listName).cellList.length; i++) {
-    if (getCell(i, listName).title === cellName) {
+    if (getCell(listName, i).title === cellName) {
       return true;
     };
   };
   return false;
 };
 
-export function deleteCell(cellIndex, listName) {
+export function deleteCell(listName, cellIndex) {
   const updatedList = data.getList(listName);
   
   updatedList.cellList.splice(cellIndex, 1);
