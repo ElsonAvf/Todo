@@ -3,5 +3,5 @@ const { merge } = require('webpack-merge');
 
  module.exports = merge(common, {
    mode: 'development',
-   devtool: 'eval',
+   devtool: 'inline-source-map',
  });
