@@ -1,4 +1,4 @@
-class Cell {
+export default class Cell {
   constructor(title, description, priority, dueDate) {
     this.title = title;
     this.description = description;
