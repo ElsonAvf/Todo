@@ -1,10 +1,9 @@
-import { addList, getList, deleteList, addCell, getCell, deleteCell } from './localStorageHandler.js';
+import { addList, getList, deleteList, addCell, getCell, doesThisCellExist, deleteCell } from './localStorageHandler.js';
 import Cell from './cell.js';
 import List from './list.js';
 
 
-function addNewList(listObj) {
-  console.log(listObj.title, getList(!listObj.title))
+function addNewList (listObj) {
   if (!getList(listObj.title)) {
     addList(listObj);
   } else {
@@ -12,15 +11,21 @@ function addNewList(listObj) {
   };
 };
 
-function updateListTitle(originalListName, updatedListTitle) {
-  const updatedList = getList(originalListName);
+function updateListTitle (originalListName, updatedListTitle) {
+  const updatedList = getList(originalListName).cellList;
+  
   deleteList(originalListName);
-  addList({title: updatedListTitle, cellList: updatedList.cellList});
+  
+  addList(new List(updatedListTitle, updatedList));
 };
 
+function addNewCell (listName, cellObj) {
+  if (!doesThisCellExist(listName, cellObj.title)) {
+    addCell(listName, cellObj);
+  } else {
+    alert('Essa célula já foi criada, tente trocar o título')
+  };
+};
 
-const dado = localStorage;
-dado.clear()
-for (let i = 0; i < dado.length; i++) {
-  console.log(dado.getItem(dado.key(i)))
-}
+const dados = localStorage;
+dados.clear();
