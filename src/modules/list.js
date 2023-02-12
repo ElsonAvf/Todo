@@ -1,6 +1,6 @@
 export default class List {
-  constructor(title) {
+  constructor(title, cellList=[]) {
     this.title = title;
-    this.cellList = [];
+    this.cellList = cellList;
   };
 };
