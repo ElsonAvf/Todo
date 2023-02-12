@@ -12,7 +12,7 @@ export function deleteList (listName) {
   data.removeItem(listName);
 };
 
-export function addCell (cellObj, listName) {
+export function addCell (listName, cellObj) {
   const updatedList = getList(listName);
   cellObj.index = updatedList.length;
   
@@ -21,8 +21,17 @@ export function addCell (cellObj, listName) {
   addList(updatedList);
 };
 
-export function getCell(cellIndex, listName) {
+export function getCell(listName, cellIndex) {
   return JSON.parse(data.getItem(listName)).cellList[cellIndex]
+};
+
+export function doesThisCellExist (cellName, listName) {
+  for (let i = 0; i < getList(listName).cellList.length; i++) {
+    if (getCell(i, listName).title === cellName) {
+      return true;
+    };
+  };
+  return false;
 };
 
 export function deleteCell(cellIndex, listName) {
