@@ -1,0 +1,27 @@
+header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+}
+
+#menu-bar {
+  justify-self: start;
+}
+
+input[type='search'] {
+  justify-self: center;
+  width: min(80%, 500px);
+}
+
+aside {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: min(45%, 300px);
+  display: flex;
+  flex-direction: column;
+  background-color: #3b82f6;
+}
+
+#close {
+  align-self: flex-end;
+}
