@@ -1,17 +1,17 @@
-const data = localStorage;
-
+//List Handler
 export function addList (listObj) {
-  data.setItem(listObj.title, JSON.stringify(listObj));
+  localStorage.setItem(listObj.title, JSON.stringify(listObj));
 };
 
 export function getList (listName) {
-  return JSON.parse(data.getItem(listName));
+  return JSON.parse(localStorage.getItem(listName));
 }
 
 export function deleteList (listName) {
-  data.removeItem(listName);
+  localStorage.removeItem(listName);
 };
 
+//Cell Handler
 export function addCell (listName, cellObj) {
   const updatedList = getList(listName);
   cellObj.index = updatedList.length;
@@ -35,7 +35,7 @@ export function doesThisCellExist (listName, cellName) {
 };
 
 export function deleteCell(listName, cellIndex) {
-  const updatedList = data.getList(listName);
+  const updatedList = getList(listName);
   
   updatedList.cellList.splice(cellIndex, 1);
   

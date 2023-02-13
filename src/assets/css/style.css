@@ -1,10 +1,15 @@
 header {
+  margin: 0 8px;
   display: grid;
   grid-template-columns: auto 1fr auto;
 }
 
-#menu-bar {
-  justify-self: start;
+#logo {
+  grid-column: 1 / 4;
+  margin: 10px 0;
+}
+
+header > button {
 }
 
 input[type='search'] {
@@ -20,6 +25,10 @@ aside {
   display: flex;
   flex-direction: column;
   background-color: #3b82f6;
+}
+
+aside.hidden {
+  display: none;
 }
 
 #close {
