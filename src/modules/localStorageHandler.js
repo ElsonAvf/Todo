@@ -1,3 +1,7 @@
+export getStorageLength () {
+  return localStorage.length;
+};
+
 //List Handler
 export function addList (listObj) {
   localStorage.setItem(listObj.title, JSON.stringify(listObj));
@@ -5,6 +9,16 @@ export function addList (listObj) {
 
 export function getList (listName) {
   return JSON.parse(localStorage.getItem(listName));
+}
+
+export function getAllLists() {
+  let allLists = [];
+  for (let i = 0; i<localStorage.length; i++) {
+    allLists.push(JSON.parse(
+      localStorage.getItem(localStorage.key(i))
+    ));
+  };
+  return allLists;
 }
 
 export function deleteList (listName) {
