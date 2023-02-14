@@ -1,20 +1,43 @@
+:root {
+  --body-bg-color: #ffffff;
+  --primary-color: #0d1c36;
+  --headings: #0d1c36;
+  --medium-emphasis-text: #000000;
+}
+
+body {
+  background-color: var(--body-bg-color);
+}
+
+
 header {
   margin: 0 8px;
   display: grid;
   grid-template-columns: auto 1fr auto;
+  align-items: center;
 }
 
 #logo {
   grid-column: 1 / 4;
-  margin: 10px 0;
+  margin: 10px 0 8px 0;
+  color: var(--headings);
+  font-weight: bold;
 }
 
-header > button {
+header > button, aside > button {
+  border: none;
+  background: none;
 }
 
 input[type='search'] {
   justify-self: center;
   width: min(80%, 500px);
+  outline: none;
+  color: var(--medium-emphasis-text);
+  border: 1px solid var(--headings);
+  border-radius: 6px;
+  padding: 3px;
+  background-color: inherit;
 }
 
 aside {
@@ -24,7 +47,11 @@ aside {
   width: min(45%, 300px);
   display: flex;
   flex-direction: column;
-  background-color: #3b82f6;
+}
+
+aside button {
+  color: white;
+  font-weight: bold;
 }
 
 aside.hidden {
@@ -33,4 +60,26 @@ aside.hidden {
 
 #close {
   align-self: flex-end;
+}
+
+aside, #add-new {
+  background-color: var(--primary-color);
+}
+
+#add-new {
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+}
+
+#add-new > img {
+  position: absolute;
+  inset: 0;
+  margin: auto;
 }
