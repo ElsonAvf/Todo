@@ -6,4 +6,6 @@ import './modules/controller';
 
 import './modules/aside.js';
 
-import './modules/toggleTheme.js';
+import './modules/view/toggleTheme.js';
+
+import './modules/view/renderDOM.js';

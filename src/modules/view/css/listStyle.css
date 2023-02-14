@@ -1,0 +1,15 @@
+.items {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  justify-items: end;
+  border: 1px solid red;
+}
+
+.items > * {
+  border: 1px solid red;
+}
+
+.items > h1 {
+  justify-self: start;
+}
