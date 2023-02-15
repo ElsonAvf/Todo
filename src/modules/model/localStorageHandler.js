@@ -1,28 +1,53 @@
-export function getStorageLength () {
-  return localStorage.length;
+function getMainList () {
+  return JSON.parse(localStorage.getItem('Lists'));
+}
+
+function updateMainList (newList) {
+  localStorage.setItem('Lists', JSON.stringify(newList));
+}
+
+function getMainListItemByName (listName) {
+  for (let i = 0; i<mainList.length; i++) {
+    if (mainList[i].title === listName) {
+      return mainList[i];
+    };
+  };
+};
+
+function getMainListItemIndex (listName) {
+  const mainList = getMainList();
+  for (let index = 0; index<mainList.length; index++) {
+    if (mainList[i].title === listName) {
+      return index;
+    };
+  };
 };
 
 //List Handler
 export function addList (listObj) {
-  localStorage.setItem(listObj.title, JSON.stringify(listObj));
+  const newList = getMainList();
+  newList.push(listObj);
+  updateMainList(newList)
 };
 
 export function getList (listName) {
-  return JSON.parse(localStorage.getItem(listName));
+  const list = getMainListItemByName(listName)
+  return list;
 }
 
 export function getAllLists() {
+  const mainList = getMainList()
   let allLists = [];
-  for (let i = 0; i<localStorage.length; i++) {
-    allLists.push(JSON.parse(
-      localStorage.getItem(localStorage.key(i))
-    ));
+  for (let i = 0; i<mainList.length; i++) {
+    const list = getMainList()[i];
+    console.log(list)
+    allLists.push(list);
   };
   return allLists;
-}
+};
 
 export function deleteList (listName) {
-  localStorage.removeItem(listName);
+  updateMainList(getMainListItemIndex(listName).splice(listIndex, 1));
 };
 
 //Cell Handler
@@ -54,4 +79,10 @@ export function deleteCell(listName, cellIndex) {
   updatedList.cellList.splice(cellIndex, 1);
   
   addList(updatedList);
+};
+
+localStorage.clear()
+if (!localStorage.length) {
+  localStorage.setItem('Home', JSON.stringify([]));
+  localStorage.setItem('Lists', JSON.stringify([]));
 };

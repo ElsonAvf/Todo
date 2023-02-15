@@ -2,12 +2,12 @@ import { addList, getList, deleteList, addCell, getCell, doesThisCellExist, dele
 import Cell from './../model/cell.js';
 import List from './../model/list.js';
 
-function addNewList (listObj) {
+export function addNewList (listObj) {
   if (!getList(listObj.title)) {
     addList(listObj);
-  } else {
-    console.log(`O título ${listObj.title} já está sendo usado`);
-  };
+    return true;
+  } 
+  return false;
 };
 
 function updateListTitle (originalListTitle, updatedListTitle) {
