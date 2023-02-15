@@ -7,8 +7,8 @@ import './css/listStyle.css';
 const content = document.querySelector('#content');
 
 function removePreviousContent () {
-  if (content.firstChildElement) {
-    content.firstChildElement.remove();
+  if (content.firstElementChild) {
+    content.firstElementChild.remove();
   };
 };
 
@@ -19,8 +19,9 @@ function displayListMenu () {
   const lists = getAllLists()
   ;
   const container = document.createElement('div');
-  const containerTitle = document.createElement('h1');
+  const containerTitle = document.createElement('h2');
   
+  container.id = 'list-menu-container';
   containerTitle.textContent = 'Lists';
   
   container.appendChild(containerTitle);

@@ -1,15 +1,23 @@
+#list-menu-container {
+  display: grid;
+  grid-template-columns: min(90%, 700px);
+  justify-content: center;
+  gap: 12px;
+}
+
 .items {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 1fr auto auto;
   align-items: center;
   justify-items: end;
-  border: 1px solid red;
+  gap: 16px;
+  background-color: var(--3rd-elevation-color);
+  padding: 8px;
+  border: var(--border);
+  box-shadow: var(--shadow);
 }
 
-.items > * {
-  border: 1px solid red;
-}
-
-.items > h1 {
+.items > h3 {
   justify-self: start;
+  margin: 0;
 }

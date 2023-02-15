@@ -1,4 +1,4 @@
-export getStorageLength () {
+export function getStorageLength () {
   return localStorage.length;
 };
 

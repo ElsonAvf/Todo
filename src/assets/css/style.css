@@ -2,9 +2,29 @@
   --body-bg-color: #ffffff;
   --primary-color: #0d1c36;
   --headings: #0d1c36;
+  --high-emphasis-text: #000000;
   --medium-emphasis-text: #000000;
+  --2nd-elevation-color: #ffffff;
+  --3rd-elevation-color: #ffffff;
+  --border: 1px solid black;
+  --shadow: 5px 5px #0d1c36;
 }
 
+/*Common Styles*/
+#logo, h2 {
+  color: var(--headings);
+}
+#add-new, aside {
+  background-color: var(--primary-color);
+}
+.amount-of-cells, h3 {
+  color: var(--medium-emphasis-text);
+}
+input[type="search"] {
+  background-color: var(--2nd-elevation-color);
+}
+
+/*****Main*****/
 body {
   background-color: var(--body-bg-color);
 }
@@ -20,11 +40,10 @@ header {
 #logo {
   grid-column: 1 / 4;
   margin: 10px 0 8px 0;
-  color: var(--headings);
   font-weight: bold;
 }
 
-header > button, aside > button {
+button {
   border: none;
   background: none;
 }
@@ -37,7 +56,6 @@ input[type='search'] {
   border: 1px solid var(--headings);
   border-radius: 6px;
   padding: 3px;
-  background-color: inherit;
 }
 
 aside {
@@ -60,10 +78,6 @@ aside.hidden {
 
 #close {
   align-self: flex-end;
-}
-
-aside, #add-new {
-  background-color: var(--primary-color);
 }
 
 #add-new {

@@ -3,7 +3,6 @@ import Cell from './cell.js';
 import List from './list.js';
 
 function addNewList (listObj) {
-  console.log(!getList(listObj.title))
   if (!getList(listObj.title)) {
     addList(listObj);
   } else {
