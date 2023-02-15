@@ -1,4 +1,4 @@
-import { getAllLists } from './../localStorageHandler.js';
+import { getAllLists } from './../model/localStorageHandler.js';
 
 import { createListElement } from './createListElement.js';
 

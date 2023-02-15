@@ -1,6 +1,6 @@
-import { addList, getList, deleteList, addCell, getCell, doesThisCellExist, deleteCell } from './localStorageHandler.js';
-import Cell from './cell.js';
-import List from './list.js';
+import { addList, getList, deleteList, addCell, getCell, doesThisCellExist, deleteCell } from './../model/localStorageHandler.js';
+import Cell from './../model/cell.js';
+import List from './../model/list.js';
 
 function addNewList (listObj) {
   if (!getList(listObj.title)) {

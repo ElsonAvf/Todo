@@ -2,9 +2,9 @@
 import './assets/css/normalize.css';
 import './assets/css/style.css';
 //JAVASCRIPT
-import './modules/controller';
+import './modules/controller/controller.js';
 
-import './modules/aside.js';
+import './modules/model/aside.js';
 
 import './modules/view/toggleTheme.js';
 
