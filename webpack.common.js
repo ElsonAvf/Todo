@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
   plugins: [
     new HtmlWebpackPlugin({
 	template: './src/index.html',
+	filename: './../index.html',
     }),
   ],
   output: {
@@ -14,6 +15,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
    },
   module: {
     rules: [
+      {
+        test: /\.(js)$/,
+	exclude: /node_modules/,
+	use: ['babel-loader'],
+      },
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
@@ -28,4 +34,5 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
       },
     ],
   },
+  resolve: { extensions: ['*', '.js'] }
  };
