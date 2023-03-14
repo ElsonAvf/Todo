@@ -1,0 +1,19 @@
+header {
+  margin: 0;
+  padding: 0 8px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+}
+#logo {
+  grid-column: 1 / 4;
+  margin: 10px 0 8px 0px;
+  font-weight: bold;
+}
+input[type='search'] {
+  justify-self: center;
+  width: min(80%, 500px);
+  outline: none;
+  border-radius: 6px;
+  padding: 3px;
+}
