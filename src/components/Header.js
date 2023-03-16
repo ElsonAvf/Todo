@@ -1,16 +1,19 @@
 import React from 'react';
+import { useThemeContext, useDispatchThemeContext  } from './contexts/ThemeContext.js'
 
 import './../assets/css/Header.css';
 
 import darkModeSvg from './../assets/icons/dark_mode.svg';
 import lightModeSvg from './../assets/icons/light_mode.svg';
 
-export default function Header({darkMode, toggleMode, toggleAside}) {
-  let colorTheme = darkMode ? 'white' : '#0d1c36';
+export default function Header({ toggleMode, toggleAside }) {
+  const theme = useThemeContext();
+  const dispatchTheme = useDispatchThemeContext();
+  let colorTheme = theme ? 'white' : '#0d1c36';
   let searchInputStyle = {
-    backgroundColor: darkMode ? '#222222' : 'white',
-    color: darkMode ? 'rgba(255,255,255,.6)' : 'black',
-    border: darkMode ? '1px solid white': '1px solid #0D1C36',
+    backgroundColor: theme ? '#222222' : 'white',
+    color: theme ? 'rgba(255,255,255,.6)' : 'black',
+    border: theme ? '1px solid white': '1px solid #0D1C36',
   }
   return (
     <header>
@@ -21,8 +24,8 @@ export default function Header({darkMode, toggleMode, toggleAside}) {
         </svg>
       </button>
       <input style={searchInputStyle} type='search' />
-      <button onClick={toggleMode} type='button' id='theme-icon'>
-        <img src={darkMode ? lightModeSvg : darkModeSvg}/>
+      <button onClick={dispatchTheme} type='button' id='theme-icon'>
+        <img src={theme ? lightModeSvg : darkModeSvg}/>
       </button>
     </header>
   );
