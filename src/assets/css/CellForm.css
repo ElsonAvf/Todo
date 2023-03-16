@@ -1,0 +1,34 @@
+#cell-form-container {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,.8);
+  display: flex;
+}
+#cell-form {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  height: 400px;
+  width: min(80%, 500px);
+  padding: 20px;
+  display: grid;
+  grid-template-rows: repeat(4, auto) 1fr auto;
+  justify-content: center;
+}
+#prioriry {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+#priority input[type='radio'] {
+  appearance: none;
+}
+#priority label:nth-child(2) {
+  border: 1px solid green;
+}
+#priority label:nth-child(3) {
+  border: 1px solid yellow;
+}
+#priority label:nth-child(4) {
+  border: 1px solid red;
+}
