@@ -4,43 +4,48 @@ import { getListById, addList, deleteList } from './listStorageHandler.js';
 
 export function addCell (listId, cellObj) {
   const updatedList = getListById(listId);
-  cellObj.listId = updatedList.Id;
-  cellObj.id = uniqid();
+  cellObj.listId = listId;
+  if (!cellObj.id) {
+    cellObj.id = uniqid();
+  }
   updatedList.cellList.unshift(cellObj);
   deleteList(listId)
   addList(updatedList);
 };
 
-export function getCellById(listName, cellId) {
+export function getCellById(listId, cellId) {
   const cell = getListById(listId).cellList.filter(obj => obj.id === cellId);
   
-  return cell;
+  return cell[0];
 };
 
 function getCellIndex(listId, cellId) {
-  const cellList = getListById(listId).cellList;
-  for (let index = 0; index < cellList.length; index ++) {
-    if (cellList[index].id === cellId) {
-      return index;
-    };
-  };
-};
-
-export function isTheTitleBeingUsed (listId, cellTitle) {
   const list = getListById(listId);
-  for (let i = 0; i < list.cellList.length; i++) {
-    if (list.cellList[i].title === cellTitle) {
-      return true;
-    };
-  };
-  return false;
-};
+  for (let index = 0; index < list.cellList.length; index++) {
+    if (list.cellList[index].id === cellId) {
+      return index
+    }
+  }
+}
+
+function insertInTheSameIndex(listId, cellId, updatedCell) {
+  const updatedList = getListById(listId);
+  const oldIndex = getCellIndex(listId, cellId);
+  updatedList.cellList.splice(oldIndex, 1, updatedCell)
+  deleteList(listId);
+  addList(updatedList);
+}
+
+export function updateCell(listId, cellId, name, value) {
+  const cell = getCellById(listId, cellId);
+  const updatedCell = {...cell, [name]: value}
+  insertInTheSameIndex(listId, cellId, updatedCell)
+}
 
 export function deleteCell(listId, cellId) {
-  const updatedList = getList(listName);
-  
+  const updatedList = getListById(listId);
   updatedList.cellList.splice(getCellIndex(listId, cellId), 1);
-  
+  deleteList(listId);
   addList(updatedList);
 };
 
