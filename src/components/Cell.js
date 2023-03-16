@@ -3,7 +3,8 @@ import React from 'react';
 import { useDispatchMainContentContext } from './contexts/MainContentContext.js';
 import { deleteCell, updateCell } from './../model/cellStorageHandler.js';
 
-import closeSvg from './../assets/icons/red_close.svg';
+import icon from '@mdi/react';
+import { mdiDotsVertical } from '@mdi/js'
 import './../assets/css/Cell.css';
 
 export default function Cell({ cellObj }) {
@@ -28,7 +29,7 @@ export default function Cell({ cellObj }) {
       />
       <h4>{ cellObj.title }</h4>
       <span>{ cellObj.priority }</span>
-      <button type='button' onClick={deleteSelf}><img src={closeSvg} alt='remove cell' /></button>
+      <button type='button' onClick={deleteSelf}><Icon path={ mdiDotsVertical } /></button>
     </li>
   );
 };
