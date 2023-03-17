@@ -24,7 +24,7 @@ main > h2 {
   color: white;
   font-weight: bold;
 }
-#add-new > img {
+#add-new > .mdiPlus {
   position: absolute;
   inset: 0;
   margin: auto;

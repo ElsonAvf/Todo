@@ -70,7 +70,7 @@ export default function Main() {
           }
         }
       >
-        <Icon path={mdiPlus} size={1} color={'white'}/>
+        <Icon className='mdiPlus' path={mdiPlus} size={1} color={'white'}/>
       </button>
       {showForm && form}
     </main>
