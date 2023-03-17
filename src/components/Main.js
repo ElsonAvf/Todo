@@ -6,6 +6,8 @@ import CellFormContainer from './CellFormContainer';
 
 import { useMainContentContext } from './contexts/MainContentContext.js';
 import { useShowListContext } from './contexts/ShowListContext.js';
+import { useDispatchCellContext } from './contexts/CellFormContext.js';
+import { useDispatchTypeOfSubmitContext } from './contexts/TypeOfCellSubmitContext.js';
 import { useThemeContext } from './contexts/ThemeContext.js';
 
 import './../assets/css/Main.css';
@@ -15,6 +17,8 @@ export default function Main() {
   const mainContent = useMainContentContext();
   const showList = useShowListContext();
   const theme = useThemeContext();
+  const dispatchCell = useDispatchCellContext()
+  const dispatchTypeOfSubmit = useDispatchTypeOfSubmitContext()
   const [showForm, setShowForm] = React.useState(false);
   const [listId, setListId] = React.useState(null) 
   function isEmpty() {
@@ -33,7 +37,7 @@ export default function Main() {
     return (<List key={listObj.id} updateId={updateId} listObj={listObj}/>)
   };
   function displayCell(cellObj) {
-    return (<Cell key={cellObj.id} cellObj={cellObj}/>);
+    return (<Cell key={cellObj.id} cellObj={cellObj} toggleForm={toggleForm} />);
   };
   function displayListForm() {
     return (<ListForm toggleForm={toggleForm} />)
@@ -57,7 +61,12 @@ export default function Main() {
         style={
           {backgroundColor: theme ? '#1A386C' : '#0D1C36'}
         }
-        onClick={toggleForm}
+        onClick={() => {
+          dispatchCell({ type: 'reset' })
+          dispatchTypeOfSubmit({ type: 'add_new' })
+          toggleForm()
+          }
+        }
       >
         <img src={addSvg}/>
       </button>
