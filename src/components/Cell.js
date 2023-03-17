@@ -1,14 +1,20 @@
 import React from 'react';
+import CellForm from './CellForm';
 
 import { useDispatchMainContentContext } from './contexts/MainContentContext.js';
+import { useDispatchCellContext } from './contexts/CellFormContext.js';
+import { useDispatchTypeOfSubmitContext } from './contexts/TypeOfCellSubmitContext.js';
 import { deleteCell, updateCell } from './../model/cellStorageHandler.js';
 
-import icon from '@mdi/react';
-import { mdiDotsVertical } from '@mdi/js'
+import Icon from '@mdi/react';
+import { mdiClose } from '@mdi/js'
 import './../assets/css/Cell.css';
 
-export default function Cell({ cellObj }) {
+export default function Cell({ cellObj, toggleForm }) {
   const dispatchMainContent = useDispatchMainContentContext();
+  const dispatchCell = useDispatchCellContext();
+  const dispatchTypeOfSubmit = useDispatchTypeOfSubmitContext();
+  
   function deleteSelf() {
     deleteCell(cellObj.listId, cellObj.id)
     dispatchMainContent({ type: 'show_cells', id: cellObj.listId})
@@ -17,6 +23,11 @@ export default function Cell({ cellObj }) {
     const { name, checked} = e.target;
     updateCell(cellObj.listId, cellObj.id, name, checked)
     dispatchMainContent({ type: 'show_cells', id: cellObj.listId})
+  }
+  function edit() {
+    dispatchCell({ type: 'populate', listId: cellObj.listId, id: cellObj.id })
+    dispatchTypeOfSubmit({ type: 'edit' });
+    toggleForm();
   }
   
   return (
@@ -27,9 +38,9 @@ export default function Cell({ cellObj }) {
         checked={cellObj.completed}
         onChange={handleChange}
       />
-      <h4>{ cellObj.title }</h4>
+      <button onClick={edit}><h3>{ cellObj.title }</h3></button>
       <span>{ cellObj.priority }</span>
-      <button type='button' onClick={deleteSelf}><Icon path={ mdiDotsVertical } /></button>
+      <button type='button' onClick={deleteSelf}><Icon path={ mdiClose } size={1} color='red' /></button>
     </li>
   );
 };
