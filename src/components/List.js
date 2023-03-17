@@ -6,7 +6,8 @@ import { useThemeContext } from './contexts/ThemeContext.js';
 
 import { deleteList } from './../model/listStorageHandler.js';
 
-import closeSvg from './../assets/icons/red_close.svg';
+import Icon from '@mdi/react';
+import { mdiDotsVertical } from '@mdi/js';
 import './../assets/css/List.css';
 
 export default function List({ listObj, updateId }) {
@@ -42,7 +43,7 @@ export default function List({ listObj, updateId }) {
         <h3 style={{color: highEmphasisColor}}>{listObj.title}</h3>
       </button>
       <span style={{color: mediumEmphasisColor}} className='amount-of-cells'>{listObj.cellList.length}</span>
-      <button onClick={deleteSelf}><img src={closeSvg} alt='remove list' /></button>
+      <button onClick={deleteSelf}><Icon path={mdiDotsVertical} size={1} color={highEmphasisColor} /></button>
     </li>
   );
 };
