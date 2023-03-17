@@ -2,7 +2,9 @@ import React from 'react';
 
 import uniqid from 'uniqid'
 
-import { addCell } from './../../model/cellStorageHandler.js';
+import { TypeOfCellSubmitProvider } from './TypeOfCellSubmitContext.js';
+
+import { addCell, insertInTheSameIndex, getCellById } from './../../model/cellStorageHandler.js';
 import Cell from './../../model/cell.js';
 
 const CellContext = React.createContext(null);
@@ -76,7 +78,16 @@ function reducer(state, action) {
         };
       }
       return state
-  }
+    case 'populate':
+      return getCellById(action.listId, action.id);
+    case 'reset':
+      return {
+        title: '',
+        priority: 'low',
+        dueDate: '',
+        description: { type: 'textarea', content: [''] },
+      }
+    }
 }
 
 
@@ -87,10 +98,13 @@ export function CellFormProvider({ children }) {
     dueDate: '',
     description: { type: 'textarea', content: [''] },
   })
+  
   return (
     <CellContext.Provider value={ cell }>
       <DispatchCellContext.Provider value={ dispatchCell }>
-        { children }
+        <TypeOfCellSubmitProvider>
+          { children }
+        </TypeOfCellSubmitProvider>
       </DispatchCellContext.Provider>
     </CellContext.Provider>
   )
