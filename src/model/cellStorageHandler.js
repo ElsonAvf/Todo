@@ -4,19 +4,20 @@ import { getListById, addList, deleteList } from './listStorageHandler.js';
 
 export function addCell (listId, cellObj) {
   const updatedList = getListById(listId);
+  cellObj.id = uniqid();
   cellObj.listId = listId;
-  if (!cellObj.id) {
-    cellObj.id = uniqid();
-  }
   updatedList.cellList.unshift(cellObj);
   deleteList(listId)
   addList(updatedList);
 };
 
 export function getCellById(listId, cellId) {
-  const cell = getListById(listId).cellList.filter(obj => obj.id === cellId);
-  
-  return cell[0];
+  const list = getListById(listId).cellList
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].id === cellId) {
+      return list[i]
+    }
+  }
 };
 
 function getCellIndex(listId, cellId) {
@@ -28,7 +29,7 @@ function getCellIndex(listId, cellId) {
   }
 }
 
-function insertInTheSameIndex(listId, cellId, updatedCell) {
+export function insertInTheSameIndex(listId, cellId, updatedCell) {
   const updatedList = getListById(listId);
   const oldIndex = getCellIndex(listId, cellId);
   updatedList.cellList.splice(oldIndex, 1, updatedCell)
