@@ -4,6 +4,7 @@ import Main from './Main';
 import Aside from './Aside';
 
 import { ShowListProvider } from './contexts/ShowListContext.js';
+import { CellFormProvider } from './contexts/CellFormContext.js'
 
 import { useThemeContext } from './contexts/ThemeContext.js';
 
@@ -25,8 +26,10 @@ export default function App() {
     }>
       <Header toggleAside={toggleAside} />
       <ShowListProvider>
-        <Main />
-        { displayAside && <Aside toggleAside={toggleAside} /> }
+        <CellFormProvider>
+          <Main />
+          { displayAside && <Aside toggleAside={toggleAside} /> }
+        </CellFormProvider>
       </ShowListProvider>
     </div>
   );
