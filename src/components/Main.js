@@ -11,7 +11,9 @@ import { useDispatchTypeOfSubmitContext } from './contexts/TypeOfCellSubmitConte
 import { useThemeContext } from './contexts/ThemeContext.js';
 
 import './../assets/css/Main.css';
-import addSvg from './../assets/icons/add.svg';
+
+import Icon from '@mdi/react';
+import { mdiPlus } from '@mdi/js';
 
 export default function Main() {
   const mainContent = useMainContentContext();
@@ -68,7 +70,7 @@ export default function Main() {
           }
         }
       >
-        <img src={addSvg}/>
+        <Icon path={mdiPlus} size={1} color={'white'}/>
       </button>
       {showForm && form}
     </main>
