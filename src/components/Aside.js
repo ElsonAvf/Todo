@@ -8,8 +8,9 @@ import { useDispatchShowListContext } from './contexts/ShowListContext.js';
 
 import { getAllLists } from './../model/listStorageHandler.js';
 
+import Icon from '@mdi/react';
+import { mdiClose } from '@mdi/js';
 import './../assets/css/Aside.css';
-import closeSvg from './../assets/icons/close.svg'
 
 export default function Aside({ toggleAside }) {
   const dispatchMainContent = useDispatchMainContentContext();
@@ -28,7 +29,7 @@ export default function Aside({ toggleAside }) {
    }
   return (
     <aside style={styles}>
-      <button id='close' onClick={toggleAside}><img src={closeSvg} /></button>
+      <button id='close' onClick={toggleAside}><Icon path={mdiClose} size={1} color={'white'} /></button>
       <button id='home-button' type='button'>Home</button>
       <button
         onClick={change}
