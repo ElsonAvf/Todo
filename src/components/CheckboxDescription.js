@@ -21,7 +21,7 @@ export default function CheckBoxDescription({ checked, value, cellCheckboxId }) 
       <input
         type='text'
         name='text'
-        valye={value}
+        value={value}
         onKeyDown={
           (e) => dispatchCell({
             type: 'remove_checkbox',
