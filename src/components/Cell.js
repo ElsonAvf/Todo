@@ -40,7 +40,7 @@ export default function Cell({ cellObj, toggleForm }) {
       />
       <button onClick={edit}><h3>{ cellObj.title }</h3></button>
       <span>{ cellObj.priority }</span>
-      <button type='button' onClick={deleteSelf}><Icon path={ mdiClose } size={1} color='red' /></button>
+      <button type='button' onClick={deleteSelf}><Icon path={ mdiClose } size={1} color='#B00020' /></button>
     </li>
   );
 };
