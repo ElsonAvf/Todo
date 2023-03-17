@@ -8,8 +8,9 @@ import ChangeDescriptionTypeButton from './ChangeDescriptionTypeButton';
 import { useThemeContext } from './contexts/ThemeContext.js';
 import { useDispatchMainContentContext } from './contexts/MainContentContext.js';
 import { useCellContext, useDispatchCellContext } from './contexts/CellFormContext.js'; 
+import { useTypeOfSubmitContext } from './contexts/TypeOfCellSubmitContext.js';
 
-import { addCell } from './../model/cellStorageHandler.js';
+import { addCell, insertInTheSameIndex } from './../model/cellStorageHandler.js';
 import Cell from './../model/cell.js';
 
 import { mdiFormatText, mdiCheckboxOutline } from '@mdi/js';
@@ -19,6 +20,26 @@ export default function CellForm({ listId, toggleForm }) {
   const changeMainContent = useDispatchMainContentContext();
   const cell = useCellContext();
   const dispatchCell = useDispatchCellContext();
+  const typeOfSubmit = useTypeOfSubmitContext()
+  
+  function handleSubmit() {
+    if (typeOfSubmit === 'edit') {
+      edit()
+      dispatchCell({type: 'reset'})
+    } else if (typeOfSubmit === 'add_new') {
+      addNew()
+    }
+  }
+  function addNew() {
+    addCell(listId, new Cell(cell.title, cell.priority, cell.dueDate, cell.description))
+  }
+  function edit() {
+    insertInTheSameIndex(listId, cell.id, cell)
+  }
+  function cancel() {
+    toggleForm()
+    dispatchCell('reset');
+  }
   
   let content;
   if (cell.description.type === 'textarea') {
@@ -45,7 +66,7 @@ export default function CellForm({ listId, toggleForm }) {
       onSubmit={
         (e) => {
           e.preventDefault();
-          addCell(listId, new Cell(cell.title, cell.priority, cell.dueDate, cell.description))
+          handleSubmit()
           changeMainContent({type: 'show_cells', id: listId})
           toggleForm()
         }
@@ -87,7 +108,7 @@ export default function CellForm({ listId, toggleForm }) {
         />
       </div>
       { content }
-      <button type='button' onClick={toggleForm}>Cancel</button>
+      <button type='button' onClick={cancel}>Cancel</button>
       <button type='submit'>Ok</button>
     </form>
   )
