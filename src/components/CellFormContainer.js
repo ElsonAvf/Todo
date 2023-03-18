@@ -3,10 +3,10 @@ import CellForm from './CellForm';
 
 import './../assets/css/CellForm.css'
 
-export default function CellFormContainer({ toggleForm, listId }) {
+export default function CellFormContainer({ toggleForm }) {
   return (
     <div id='cell-form-container'>
-      <CellForm toggleForm={toggleForm} listId={listId} />
+      <CellForm toggleForm={toggleForm} />
     </div>
   );
 };

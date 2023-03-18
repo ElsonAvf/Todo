@@ -7,34 +7,30 @@ import ChangeDescriptionTypeButton from './ChangeDescriptionTypeButton';
 
 import { useThemeContext } from './contexts/ThemeContext.js';
 import { useDispatchMainContentContext } from './contexts/MainContentContext.js';
+import { useListIdContext } from './contexts/ListIdContext.js';
 import { useCellContext, useDispatchCellContext } from './contexts/CellFormContext.js'; 
-import { useTypeOfSubmitContext } from './contexts/TypeOfCellSubmitContext.js';
+import { useTypeOfSubmitContext } from './contexts/TypeOfSubmitContext.js';
 
 import { addCell, insertInTheSameIndex } from './../model/cellStorageHandler.js';
 import Cell from './../model/cell.js';
 
 import { mdiFormatText, mdiCheckboxOutline } from '@mdi/js';
 
-export default function CellForm({ listId, toggleForm }) {
+export default function CellForm({ toggleForm }) {
   const theme = useThemeContext();
   const changeMainContent = useDispatchMainContentContext();
+  const listId = useListIdContext()
   const cell = useCellContext();
   const dispatchCell = useDispatchCellContext();
   const typeOfSubmit = useTypeOfSubmitContext()
   
   function handleSubmit() {
     if (typeOfSubmit === 'edit') {
-      edit()
+      insertInTheSameIndex(listId, cell.id, cell)
       dispatchCell({type: 'reset'})
     } else if (typeOfSubmit === 'add_new') {
-      addNew()
+        addCell(listId, new Cell(cell.title, cell.priority, cell.dueDate, cell.description))
     }
-  }
-  function addNew() {
-    addCell(listId, new Cell(cell.title, cell.priority, cell.dueDate, cell.description))
-  }
-  function edit() {
-    insertInTheSameIndex(listId, cell.id, cell)
   }
   function cancel() {
     toggleForm()

@@ -3,7 +3,7 @@ import CellForm from './CellForm';
 
 import { useDispatchMainContentContext } from './contexts/MainContentContext.js';
 import { useDispatchCellContext } from './contexts/CellFormContext.js';
-import { useDispatchTypeOfSubmitContext } from './contexts/TypeOfCellSubmitContext.js';
+import { useDispatchTypeOfSubmitContext } from './contexts/TypeOfSubmitContext.js';
 import { deleteCell, updateCell } from './../model/cellStorageHandler.js';
 
 import Icon from '@mdi/react';
