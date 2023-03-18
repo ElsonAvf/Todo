@@ -36,11 +36,10 @@ function updateList(newListObj, oldIndex) {
 };
 
 export function updateListTitle(listId, newTitle) {
-  const updatedList = getListById(listId);
+  const newList = getListById(listId);
   const oldListIndex = getListIndex(listId);
-  updatedList.title = newTitle;
-  deleteList(listId);
-  updateList(updateList, oldListIndex)
+  newList.title = newTitle;
+  updateList(newList, oldListIndex)
 };
 
 export function deleteList(listId) {
