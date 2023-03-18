@@ -4,6 +4,7 @@ import AsideList from './AsideList';
 
 import { useThemeContext } from './contexts/ThemeContext.js';
 import { useDispatchMainContentContext } from './contexts/MainContentContext.js';
+import { useDispatchListIdContext } from './contexts/ListIdContext.js';
 import { useDispatchShowListContext } from './contexts/ShowListContext.js';
 
 import { getAllLists } from './../model/listStorageHandler.js';
@@ -14,12 +15,14 @@ import './../assets/css/Aside.css';
 
 export default function Aside({ toggleAside }) {
   const dispatchMainContent = useDispatchMainContentContext();
+  const dispatchListId = useDispatchListIdContext();
   const dispatchShowList = useDispatchShowListContext();
   const theme = useThemeContext();
   const groups = getAllLists();
   
-  function change() {
+  function displayLists() {
     dispatchShowList(true);
+    dispatchListId(null);
     dispatchMainContent({ type: 'show_lists'});
   };
        
@@ -32,7 +35,7 @@ export default function Aside({ toggleAside }) {
       <button id='close' onClick={toggleAside}><Icon path={mdiClose} size={1} color={'white'} /></button>
       <button id='home-button' type='button'>Home</button>
       <button
-        onClick={change}
+        onClick={displayLists}
         id='list-button'
         type='button'
       >
