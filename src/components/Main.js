@@ -7,7 +7,7 @@ import CellFormContainer from './CellFormContainer';
 import { useMainContentContext } from './contexts/MainContentContext.js';
 import { useShowListContext } from './contexts/ShowListContext.js';
 import { useDispatchCellContext } from './contexts/CellFormContext.js';
-import { useDispatchTypeOfSubmitContext } from './contexts/TypeOfCellSubmitContext.js';
+import { useDispatchTypeOfSubmitContext } from './contexts/TypeOfSubmitContext.js';
 import { useThemeContext } from './contexts/ThemeContext.js';
 
 import './../assets/css/Main.css';
@@ -22,7 +22,7 @@ export default function Main() {
   const dispatchCell = useDispatchCellContext()
   const dispatchTypeOfSubmit = useDispatchTypeOfSubmitContext()
   const [showForm, setShowForm] = React.useState(false);
-  const [listId, setListId] = React.useState(null) 
+  
   function isEmpty() {
     return (mainContent.content.length > 0) ? false : true;
   }
@@ -31,12 +31,8 @@ export default function Main() {
     setShowForm(prevShowForm => !prevShowForm);
   };
   
-  function updateId(id) {
-    setListId(id);
-  };
-  
   function displayList(listObj) {
-    return (<List key={listObj.id} updateId={updateId} listObj={listObj}/>)
+    return (<List key={listObj.id} listObj={listObj} toggleForm={toggleForm}/>)
   };
   function displayCell(cellObj) {
     return (<Cell key={cellObj.id} cellObj={cellObj} toggleForm={toggleForm} />);
@@ -45,12 +41,12 @@ export default function Main() {
     return (<ListForm toggleForm={toggleForm} />)
   }
   function displayCellForm() {
-    return (<CellFormContainer listId={listId} toggleForm={toggleForm}  />)
+    return (<CellFormContainer toggleForm={toggleForm}  />)
   }
   
   const display = showList ? displayList : displayCell;
   const form = showList ? displayListForm() : displayCellForm();
-  let content = mainContent.content.map(list => display(list))
+  let content = mainContent.content.map(obj => display(obj))
   let colorTheme = theme ? 'white' : '#0d1c36';
   return (
     <main>
