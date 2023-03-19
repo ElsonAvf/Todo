@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { getAllLists, getListById } from './../../model/listStorageHandler.js';
+import { getTodayTasks } from './../../model/dateHandler.js';
 
 const MainContentContext = React.createContext(null);
 const DispatchMainContentContext = React.createContext(null);
@@ -20,6 +21,8 @@ function reducer(state, action) {
     case 'show_cells':
       const list = getListById(action.id);
       return { title: list.title, content: list.cellList };
+    case 'show_today_tasks':
+      return { title: 'Today', content: getTodayTasks() }
   }
 };
 function init() {
