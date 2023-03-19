@@ -32,6 +32,9 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "@mdi/js": "^7.1.96",
+    "@mdi/react": "^1.6.1",
+    "date-fns": "^2.29.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "uniqid": "^5.4.0"
