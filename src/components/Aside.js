@@ -45,7 +45,7 @@ export default function Aside({ toggleAside }) {
         {groups.map(group =>
           <AsideList
             key={group.id}
-            listid={group.id}
+            listId={group.id}
             title={group.title}
            />
           )
