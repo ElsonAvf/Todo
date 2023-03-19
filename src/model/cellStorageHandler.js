@@ -49,7 +49,3 @@ export function deleteCell(listId, cellId) {
   deleteList(listId);
   addList(updatedList);
 };
-
-if (!localStorage.length) {
-  localStorage.setItem('Lists', JSON.stringify([]));
-};
