@@ -25,11 +25,15 @@ export default function Aside({ toggleAside }) {
     dispatchListId(null);
     dispatchMainContent({ type: 'show_lists'});
   };
-  
   function displayTodayTasks() {
-    dispatchShowList(false)
+    dispatchShowList(false);
     dispatchListId(null);
-    dispatchMainContent({ type: 'show_today_tasks'})
+    dispatchMainContent({ type: 'show_today_tasks'});
+  }
+  function displayThisWeekTasks() {
+    dispatchShowList(false);
+    dispatchListId(null);
+    dispatchMainContent({ type: 'show_this_week_tasks'})
   }
        
    const styles = {
@@ -40,6 +44,7 @@ export default function Aside({ toggleAside }) {
     <aside style={styles}>
       <button id='close' onClick={toggleAside}><Icon path={mdiClose} size={1} color={'white'} /></button>
       <button id='home-button' type='button' onClick={displayTodayTasks}>Today</button>
+      <button id='home-button' type='button' onClick={displayThisWeekTasks}>This Week</button>
       <button
         onClick={displayLists}
         id='list-button'
