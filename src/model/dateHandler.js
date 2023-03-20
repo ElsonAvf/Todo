@@ -12,7 +12,6 @@ function getTasks(callback) {
       };
     });
     todayTasks = todayTasks.concat(today)
-    console.log(todayTasks)
   };
   return todayTasks;
 };
