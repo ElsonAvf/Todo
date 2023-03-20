@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { getAllLists, getListById } from './../../model/listStorageHandler.js';
-import { getTodayTasks } from './../../model/dateHandler.js';
+import { getTodayTasks, getThisWeekTasks } from './../../model/dateHandler.js';
+import { getSearchedLists } from './../../model/searchHandler.js';
 
 const MainContentContext = React.createContext(null);
 const DispatchMainContentContext = React.createContext(null);
@@ -22,7 +23,11 @@ function reducer(state, action) {
       const list = getListById(action.id);
       return { title: list.title, content: list.cellList };
     case 'show_today_tasks':
-      return { title: 'Today', content: getTodayTasks() }
+      return { title: 'Today', content: getTodayTasks() };
+    case 'show_this_week_tasks':
+      return { title: 'This Week', content: getThisWeekTasks() }
+    case 'show_searched_lists':
+      return { title: 'Lists', content: getSearchedLists(action.searchValue)}
   }
 };
 function init() {
