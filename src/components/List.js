@@ -1,21 +1,28 @@
 import React from 'react';
+import Icon from '@mdi/react';
+import { mdiDotsVertical } from '@mdi/js';
+
 import ListMenu from './ListMenu';
 
 import { useDispatchMainContentContext } from './contexts/MainContentContext.js';
 import { useDispatchShowListContext } from './contexts/ShowListContext.js';
 import { useDispatchListIdContext } from './contexts/ListIdContext.js';
+import { useDispatchDisplayContext } from './contexts/DisplayContext.js';
+import { useDispatchToggleFormContext } from './contexts/ToggleFormContext.js';
 import { useThemeContext } from './contexts/ThemeContext.js';
+import { useDispatchTypeOfDisplayContext } from './contexts/TypeOfDisplayContext.js';
 
 import { deleteList } from './../model/listStorageHandler.js';
 
-import Icon from '@mdi/react';
-import { mdiDotsVertical } from '@mdi/js';
 import './../assets/css/List.css';
 
-export default function List({ listObj, toggleForm }) {
+export default function List({ listObj }) {
   const dispatchMainContent = useDispatchMainContentContext();
   const dispatchShowList = useDispatchShowListContext();
   const dispatchListId = useDispatchListIdContext()
+  const dispatchDisplay = useDispatchDisplayContext();
+  const dispatchTypeOfDisplay = useDispatchTypeOfDisplayContext()
+  const toggleForm = useDispatchToggleFormContext();
   const theme = useThemeContext();
   const menu = React.useRef(null);
   const [displayMenu, setDisplayMenu] = React.useState(false)
@@ -34,9 +41,11 @@ export default function List({ listObj, toggleForm }) {
     setDisplayMenu(prevDisplayMenu => !prevDisplayMenu)
   }
   
-  function change() {
+  function displayCells() {
     dispatchShowList(false);
     dispatchListId(listObj.id)
+    dispatchDisplay({ type: 'cells' });
+    dispatchTypeOfDisplay('cells');
     dispatchMainContent({ type: 'show_cells', id: listObj.id });
   }
   function removeList() {
@@ -58,7 +67,7 @@ export default function List({ listObj, toggleForm }) {
       }}
       className='items'
     >
-      <button className='list-button' type='button' onClick={change}>
+      <button className='list-button' type='button' onClick={displayCells}>
         <h3 style={{color: highEmphasisColor}}>{listObj.title}</h3>
       </button>
       <span style={{color: mediumEmphasisColor}} className='amount-of-cells'>{listObj.cellList.length}</span>
