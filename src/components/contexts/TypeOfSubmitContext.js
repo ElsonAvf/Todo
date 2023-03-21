@@ -3,10 +3,6 @@ import React from 'react';
 const TypeOfSubmitContext = React.createContext(null);
 const DispatchTypeOfSubmitContext = React.createContext(null);
 
-import { addCell, insertInTheSameIndex, getCellById } from './../../model/cellStorageHandler.js';
-import Cell from './../../model/cell.js';
-
-
 export function useTypeOfSubmitContext() {
   return React.useContext(TypeOfSubmitContext);
 }
