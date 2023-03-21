@@ -3,7 +3,7 @@ import React from 'react';
 import Cell from './Cell';
 import MainContent from './MainContent';
 import AddButton from './AddButton';
-import CellFormContainer from './CellFormContainer';
+import CellForm from './CellForm';
 
 import { useMainContentContext } from './contexts/MainContentContext.js';
 import { useDisplayFormContext, useToggleFormContext } from './contexts/ToggleFormContext.js';
@@ -20,7 +20,7 @@ export default function CellContent() {
         { content }
       </MainContent>
       <AddButton />
-      { displayForm && <CellFormContainer />}
+      { displayForm && <CellForm />}
     </main>
   );
 };
