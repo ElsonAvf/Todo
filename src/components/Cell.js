@@ -2,8 +2,6 @@ import React from 'react';
 import Icon from '@mdi/react';
 import { mdiClose } from '@mdi/js';
 
-import CellForm from './CellForm';
-
 import { useDispatchMainContentContext } from './contexts/MainContentContext.js';
 import { useDispatchCellContext } from './contexts/CellFormContext.js';
 import { useDispatchTypeOfSubmitContext } from './contexts/TypeOfSubmitContext.js';

@@ -1,4 +1,5 @@
 import React from 'react';
+import { mdiFormatText, mdiCheckboxOutline } from '@mdi/js';
 
 import CheckboxDescriptionFieldset from './CheckboxDescriptionFieldset';
 import CheckboxDescription from './CheckboxDescription';
@@ -10,27 +11,32 @@ import { useDispatchMainContentContext } from './contexts/MainContentContext.js'
 import { useListIdContext } from './contexts/ListIdContext.js';
 import { useCellContext, useDispatchCellContext } from './contexts/CellFormContext.js'; 
 import { useTypeOfSubmitContext } from './contexts/TypeOfSubmitContext.js';
+import { useDispatchToggleFormContext } from './contexts/ToggleFormContext.js';
 
 import { addCell, insertInTheSameIndex } from './../model/cellStorageHandler.js';
 import Cell from './../model/cell.js';
 
-import { mdiFormatText, mdiCheckboxOutline } from '@mdi/js';
+import './../assets/css/CellForm.css'
 
-export default function CellForm({ toggleForm }) {
+export default function CellForm() {
   const theme = useThemeContext();
   const changeMainContent = useDispatchMainContentContext();
+  const toggleForm = useDispatchToggleFormContext()
   const listId = useListIdContext()
   const cell = useCellContext();
   const dispatchCell = useDispatchCellContext();
   const typeOfSubmit = useTypeOfSubmitContext()
   
-  function handleSubmit() {
+  function handleSubmit(e) {
+    e.preventDefault()
     if (typeOfSubmit === 'edit') {
       insertInTheSameIndex(listId, cell.id, cell)
       dispatchCell({type: 'reset'})
     } else if (typeOfSubmit === 'add_new') {
         addCell(listId, new Cell(cell.title, cell.priority, cell.dueDate, cell.description))
     }
+    changeMainContent({type: 'show_cells', id: listId})
+    toggleForm()
   }
   function cancel() {
     toggleForm()
@@ -56,56 +62,51 @@ export default function CellForm({ toggleForm }) {
     
   const styles = { backgroundColor: theme ? '#222222' : 'white' }
   return (
-    <form
-      id='cell-form'
-      style={styles}
-      onSubmit={
-        (e) => {
-          e.preventDefault();
-          handleSubmit()
-          changeMainContent({type: 'show_cells', id: listId})
-          toggleForm()
-        }
-      }
-    >
-      <input
-        name='title'
-        value={cell.title}
-        placeholder='Title'
-        type='text'
-        minLength='3'
-        maxLength='20'
-        required
-        onChange={
-          (e) => dispatchCell({type: 'change', name: e.target.name, value: e.target.value })
-        }
-      />
-      <PriorityFieldset />
-      <input
-        name='dueDate'
-        value={cell.dueDate}
-        type='date'
-        onChange={
-          (e) => dispatchCell({type: 'change', name: e.target.name, value: e.target.value})
-        }
-      />
-      <div>
-        <ChangeDescriptionTypeButton 
-          icon={mdiFormatText}
-          change={(e) =>
-          dispatchCell({type: 'change_description_to_textarea'})
-          } 
+    <div id='cell-form-container'>
+      <form
+        id='cell-form'
+        style={styles}
+        onSubmit={handleSubmit}
+      >
+        <input
+          name='title'
+          value={cell.title}
+          placeholder='Title'
+          type='text'
+          minLength='3'
+          maxLength='20'
+          required
+          onChange={
+            (e) => dispatchCell({type: 'change', name: e.target.name, value: e.target.value })
+          }
         />
-        <ChangeDescriptionTypeButton
-          icon={mdiCheckboxOutline}
-          change={(e) =>
-          dispatchCell({type: 'change_description_to_checkbox'})
-          } 
+        <PriorityFieldset />
+        <input
+          name='dueDate'
+          value={cell.dueDate}
+          type='date'
+          onChange={
+            (e) => dispatchCell({type: 'change', name: e.target.name, value: e.target.value})
+          }
         />
-      </div>
-      { content }
-      <button type='button' onClick={cancel}>Cancel</button>
-      <button type='submit'>Ok</button>
-    </form>
+        <div>
+          <ChangeDescriptionTypeButton 
+            icon={mdiFormatText}
+            change={(e) =>
+            dispatchCell({type: 'change_description_to_textarea'})
+            } 
+          />
+          <ChangeDescriptionTypeButton
+            icon={mdiCheckboxOutline}
+            change={(e) =>
+            dispatchCell({type: 'change_description_to_checkbox'})
+            } 
+          />
+        </div>
+        { content }
+        <button type='button' onClick={cancel}>Cancel</button>
+        <button type='submit'>Ok</button>
+      </form>
+    </div>
   )
 }
