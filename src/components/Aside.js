@@ -6,6 +6,8 @@ import { useThemeContext } from './contexts/ThemeContext.js';
 import { useDispatchMainContentContext } from './contexts/MainContentContext.js';
 import { useDispatchListIdContext } from './contexts/ListIdContext.js';
 import { useDispatchShowListContext } from './contexts/ShowListContext.js';
+import { useDispatchDisplayContext } from './contexts/DisplayContext.js';
+import { useDispatchTypeOfDisplayContext } from './contexts/TypeOfDisplayContext.js';
 
 import { getAllLists } from './../model/listStorageHandler.js';
 
@@ -16,24 +18,32 @@ import './../assets/css/Aside.css';
 export default function Aside({ toggleAside }) {
   const dispatchMainContent = useDispatchMainContentContext();
   const dispatchListId = useDispatchListIdContext();
+  const dispatchDisplay = useDispatchDisplayContext();
   const dispatchShowList = useDispatchShowListContext();
+  const dispatchTypeOfDisplay = useDispatchTypeOfDisplayContext();
   const theme = useThemeContext();
   const groups = getAllLists();
   
   function displayLists() {
     dispatchShowList(true);
     dispatchListId(null);
+    dispatchDisplay({ type: 'lists' })
+    dispatchTypeOfDisplay('lists');
     dispatchMainContent({ type: 'show_lists'});
   };
   function displayTodayTasks() {
     dispatchShowList(false);
+    dispatchDisplay({ type: 'due_date_cells' })
     dispatchListId(null);
     dispatchMainContent({ type: 'show_today_tasks'});
+    dispatchTypeOfDisplay('today')
   }
   function displayThisWeekTasks() {
     dispatchShowList(false);
+    dispatchDisplay({ type: 'due_date_cells'})
     dispatchListId(null);
     dispatchMainContent({ type: 'show_this_week_tasks'})
+    dispatchTypeOfDisplay('this_week')
   }
        
    const styles = {
