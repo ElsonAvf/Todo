@@ -2,12 +2,32 @@ import { getAllLists, getListById } from './listStorageHandler.js';
 
 export function getSearchedLists(searchedTitle) {
   const allLists = getAllLists();
-  const pattern = new RegExp(searchedTitle, 'g');
-  const allMatchingTitle = allLists.filter(list => {
+  const pattern = new RegExp(searchedTitle, 'gi');
+  const allMatchingTitles = allLists.filter(list => {
     if (list.title.match(pattern)) {
-      console.log(searchedTitle)
-      return list
-    }
-  })
-  return allMatchingTitle;
+      return list;
+    };
+  });
+  return allMatchingTitles;
+};
+
+export function getSearchedCells(listId, searchedTitle) {
+  const allCells = getListById(listId).cellList;
+  const pattern = new RegExp(searchedTitle, 'gi');
+  const allMatchingTitles = allCells.filter(cell => {
+    if (cell.title.match(pattern)) {
+      return cell;
+    };
+  });
+  return allMatchingTitles;
+}
+
+export function getSearchedDueDateCells(list, searchedTitle) {
+  const pattern = new RegExp(searchedTitle, 'gi');
+  const allMatchingTitles = list.filter(cell => {
+    if (cell.title.match(pattern)) {
+      return cell;
+    };
+  });
+  return allMatchingTitles;
 }
