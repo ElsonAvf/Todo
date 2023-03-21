@@ -1,12 +1,16 @@
 import React from 'react';
-import { useDispatchTypeOfSubmitContext } from './contexts/TypeOfSubmitContext.js';
-import { useDispatchListIdContext } from './contexts/ListIdContext.js';
 import Icon from '@mdi/react'
 import { mdiRename, mdiDelete } from '@mdi/js'
 
-export default function ListMenu({ removeList, toggleForm, listId }) {
+import { useDispatchTypeOfSubmitContext } from './contexts/TypeOfSubmitContext.js';
+import { useDispatchListIdContext } from './contexts/ListIdContext.js';
+import { useDispatchToggleFormContext } from './contexts/ToggleFormContext.js';
+
+export default function ListMenu({ removeList, listId }) {
   const dispatchListId = useDispatchListIdContext();
   const dispatchTypeOfSubmit = useDispatchTypeOfSubmitContext()
+  const toggleForm = useDispatchToggleFormContext();
+  
   function rename() {
     dispatchListId(listId)
     dispatchTypeOfSubmit({type: 'edit'})
