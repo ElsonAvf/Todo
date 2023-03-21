@@ -1,18 +1,23 @@
 import React from 'react';
+import Icon from '@mdi/react';
+import { mdiClose } from '@mdi/js';
+
 import CellForm from './CellForm';
 
 import { useDispatchMainContentContext } from './contexts/MainContentContext.js';
 import { useDispatchCellContext } from './contexts/CellFormContext.js';
 import { useDispatchTypeOfSubmitContext } from './contexts/TypeOfSubmitContext.js';
+import { useDispatchListIdContext } from './contexts/ListIdContext.js'; 
+import { useDispatchToggleFormContext } from './contexts/ToggleFormContext.js';
 import { deleteCell, updateCell } from './../model/cellStorageHandler.js';
 
-import Icon from '@mdi/react';
-import { mdiClose } from '@mdi/js'
 import './../assets/css/Cell.css';
 
-export default function Cell({ cellObj, toggleForm }) {
+export default function Cell({ cellObj }) {
   const dispatchMainContent = useDispatchMainContentContext();
+  const dispatchListId = useDispatchListIdContext();
   const dispatchCell = useDispatchCellContext();
+  const toggleForm = useDispatchToggleFormContext();
   const dispatchTypeOfSubmit = useDispatchTypeOfSubmitContext();
   
   function deleteSelf() {
@@ -26,6 +31,7 @@ export default function Cell({ cellObj, toggleForm }) {
   }
   function edit() {
     dispatchCell({ type: 'populate', listId: cellObj.listId, id: cellObj.id })
+    dispatchListId(cellObj.listId);
     dispatchTypeOfSubmit({ type: 'edit' });
     toggleForm();
   }
