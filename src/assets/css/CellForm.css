@@ -46,6 +46,17 @@
   align-items: center;
   gap: 8px;
 }
+#change-description-div {
+  display: flex;
+  justify-content: center;
+}
+.change-description-button {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 #cell-form > textarea {
   justify-self: stretch;
   outline: none;

@@ -9,7 +9,6 @@ import { useCellContext, useDispatchCellContext } from './contexts/CellFormConte
 
 import './../assets/css/CheckboxDescriptionFieldset.css';
 
-
 export default function CellDescriptionFieldSet() {
   const theme = useThemeContext();
   const cell = useCellContext();

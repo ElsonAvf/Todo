@@ -104,15 +104,17 @@ export default function CellForm() {
             onChange={handleChange}
           />
         </label>
-        <div>
+        <div id='change-description-div'>
           <ChangeDescriptionTypeButton 
             icon={mdiFormatText}
+            active={cell.description.type === 'textarea'}
             change={(e) =>
             dispatchCell({type: 'change_description_to_textarea'})
             } 
           />
           <ChangeDescriptionTypeButton
             icon={mdiCheckboxOutline}
+            active={cell.description.type === 'checkbox'}
             change={(e) =>
             dispatchCell({type: 'change_description_to_checkbox'})
             } 
