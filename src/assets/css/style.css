@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: Sans-Serif;
 }
 button {
   border: none;
@@ -11,4 +12,12 @@ li {
 html,body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
+body {
+  display: flex;
+  flex-direction: column;
+}
+#root {
+  flex: 1;
+} 

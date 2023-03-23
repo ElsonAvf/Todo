@@ -27,6 +27,12 @@ export default function CellForm() {
   const dispatchCell = useDispatchCellContext();
   const typeOfSubmit = useTypeOfSubmitContext()
   
+  let color = { color: theme ? 'white' : 'black' };
+  let styles = {
+    backgroundColor: theme ? '#222222' : 'white',
+    color: color.color,
+  }
+  
   function handleSubmit(e) {
     e.preventDefault()
     if (typeOfSubmit === 'edit') {
@@ -38,6 +44,13 @@ export default function CellForm() {
     changeMainContent({type: 'show_cells', id: listId})
     toggleForm()
   }
+  function handleChange(e) {
+    dispatchCell({
+      type: 'change',
+      name: e.target.name,
+      value: e.target.value
+    })
+  }
   function cancel() {
     toggleForm()
     dispatchCell('reset');
@@ -47,6 +60,8 @@ export default function CellForm() {
   if (cell.description.type === 'textarea') {
     content = (
       <textarea
+      style={color}
+        placeholder='Description'
         onChange={(e) => dispatchCell({
           type: 'textarea_description_change',
           value: e.target.value
@@ -59,8 +74,7 @@ export default function CellForm() {
   } else {
     content = <CheckboxDescriptionFieldset />
   }
-    
-  const styles = { backgroundColor: theme ? '#222222' : 'white' }
+  
   return (
     <div id='cell-form-container'>
       <form
@@ -76,19 +90,20 @@ export default function CellForm() {
           minLength='3'
           maxLength='20'
           required
-          onChange={
-            (e) => dispatchCell({type: 'change', name: e.target.name, value: e.target.value })
-          }
+          style={styles}
+          onChange={handleChange}
         />
         <PriorityFieldset />
-        <input
-          name='dueDate'
-          value={cell.dueDate}
-          type='date'
-          onChange={
-            (e) => dispatchCell({type: 'change', name: e.target.name, value: e.target.value})
-          }
-        />
+        <label id='date-label'>
+        Due Date:
+          <input
+            name='dueDate'
+            value={cell.dueDate}
+            type='date'
+            style={color}
+            onChange={handleChange}
+          />
+        </label>
         <div>
           <ChangeDescriptionTypeButton 
             icon={mdiFormatText}
@@ -104,8 +119,10 @@ export default function CellForm() {
           />
         </div>
         { content }
-        <button type='button' onClick={cancel}>Cancel</button>
-        <button type='submit'>Ok</button>
+        <div id='action-buttons'>
+          <button type='button' style={color} onClick={cancel}>Cancel</button>
+          <button type='submit' style={color}>Save</button>
+        </div>
       </form>
     </div>
   )

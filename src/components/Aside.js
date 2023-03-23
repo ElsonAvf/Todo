@@ -1,4 +1,6 @@
 import React from 'react';
+import Icon from '@mdi/react';
+import { mdiClose, mdiCalendarToday, mdiCalendarWeek, mdiViewList } from '@mdi/js';
 
 import AsideList from './AsideList';
 
@@ -11,8 +13,6 @@ import { useDispatchTypeOfDisplayContext } from './contexts/TypeOfDisplayContext
 
 import { getAllLists } from './../model/listStorageHandler.js';
 
-import Icon from '@mdi/react';
-import { mdiClose } from '@mdi/js';
 import './../assets/css/Aside.css';
 
 export default function Aside({ toggleAside }) {
@@ -53,13 +53,20 @@ export default function Aside({ toggleAside }) {
   return (
     <aside style={styles}>
       <button id='close' onClick={toggleAside}><Icon path={mdiClose} size={1} color={'white'} /></button>
-      <button id='home-button' type='button' onClick={displayTodayTasks}>Today</button>
-      <button id='home-button' type='button' onClick={displayThisWeekTasks}>This Week</button>
+      <button id='today-button' type='button' onClick={displayTodayTasks}>
+        <Icon path={mdiCalendarToday} size={1} color={'white'} />
+        Today
+      </button>
+      <button id='this-week-button' type='button' onClick={displayThisWeekTasks}>
+        <Icon path={mdiCalendarWeek} size={1} color={'white'} />
+        This Week
+      </button>
       <button
         onClick={displayLists}
         id='list-button'
         type='button'
       >
+        <Icon path={mdiViewList} size={1} color='white' />
         Lists
       </button>
       <ul>

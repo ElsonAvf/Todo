@@ -23,7 +23,7 @@ export default function App() {
   
   return (
     <div id='app' style={
-        {backgroundColor: theme ? '#121212' : 'white'}
+        {backgroundColor: theme ? '#121212' : 'ghostwhite'}
     }>
       <Header toggleAside={toggleAside} />
       <ShowListProvider>

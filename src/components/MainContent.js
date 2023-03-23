@@ -9,12 +9,12 @@ export default function MainContent({ children }) {
   function isEmpty() {
     return (children.length > 0) ? false : true;
   }
-  let colorTheme = theme ? 'white' : '#0d1c36';
+  let colorTheme = { color: theme ? 'white' : '#0d1c36' };
   return (
     <section>
-      <h2 style={{color: colorTheme}}>{mainContent.title}</h2>
+      <h2 style={colorTheme}>{mainContent.title}</h2>
       <ul id='menu-container'>
-      { isEmpty() ? <div>Empty</div> : children }
+      { isEmpty() ? <div style={colorTheme} id='empty'>Empty</div> : children }
       </ul>
     </section>
   );

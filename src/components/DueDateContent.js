@@ -2,7 +2,7 @@ import React from 'react';
 
 import Cell from './Cell';
 import MainContent from './MainContent';
-import CellFormContainer from './CellFormContainer';
+import CellForm from './CellForm';
 
 import { useMainContentContext } from './contexts/MainContentContext.js';
 import { useDisplayFormContext } from './contexts/ToggleFormContext.js';
@@ -18,7 +18,7 @@ export default function DueDateContent() {
       <MainContent>
         { content }
       </MainContent>
-      { displayForm && <CellFormContainer /> }
+      { displayForm && <CellForm /> }
     </main>
   );
 };

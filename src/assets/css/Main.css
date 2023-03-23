@@ -1,7 +1,7 @@
-main {
+main > section {
   height: 100%;
 }
-main > h2 {
+main > section > h2 {
   margin: 10px 8px;
 }
 #menu-container {
@@ -28,4 +28,10 @@ main > h2 {
   position: absolute;
   inset: 0;
   margin: auto;
+}
+#empty {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

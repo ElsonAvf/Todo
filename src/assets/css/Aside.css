@@ -4,9 +4,11 @@ aside {
   bottom: 0;
   width: min(70%, 300px);
   padding: 8px;
+  padding-right: 16px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 10px;
 }
 #close {
   align-self: flex-end;
@@ -16,11 +18,29 @@ aside button {
   font-weight: bold;
   font-size: 20px;
 }
+
+aside > #today-button,
+aside > #this-week-button,
+aside > #list-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 aside > #list-button {
   margin-top: 50px;
+  margin-bottom: 0;
 }
 aside > ul{
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 8px 0 0 12px;
+  overflow: auto;
+}
+aside label {
+  display: flex;
+  align-items: center;
+}
+.aside-list-btn {
+  font-size: 16px;
 }

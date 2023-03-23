@@ -1,4 +1,6 @@
 import React from 'react';
+import Icon from '@mdi/react';
+import { mdiMenu, mdiMagnify } from '@mdi/js'
 
 import { useThemeContext, useDispatchThemeContext  } from './contexts/ThemeContext.js';
 import { useDispatchMainContentContext } from './contexts/MainContentContext.js';
@@ -6,8 +8,7 @@ import { useListIdContext } from './contexts/ListIdContext.js';
 import { useTypeOfDisplayContext } from './contexts/TypeOfDisplayContext.js';
 
 import './../assets/css/Header.css';
-import Icon from '@mdi/react';
-import { mdiMenu } from '@mdi/js'
+
 import darkModeSvg from './../assets/icons/dark_mode.svg';
 import lightModeSvg from './../assets/icons/light_mode.svg';
 
@@ -35,21 +36,29 @@ export default function Header({ toggleMode, toggleAside }) {
   }
   
   let colorTheme = theme ? 'white' : '#0d1c36';
-  let searchInputStyle = {
+  let labelStyle = {
     backgroundColor: theme ? '#222222' : 'white',
-    color: theme ? 'rgba(255,255,255,.6)' : 'black',
     border: theme ? '1px solid white': '1px solid #0D1C36',
   }
+  let searchInputStyle = { color: theme ? 'white' : 'black' }
+  let background = {
+    backgroundColor: theme ? '#121212' : 'ghostwhite',
+  }
   return (
-    <header>
+    <header style={background}>
       <h1 style={{color: colorTheme}} id='logo'>Todo</h1>
-      <button onClick={toggleAside} id='menu-bar' type='button' >
-        <Icon path={mdiMenu} size={1} color={colorTheme} />
-      </button>
-      <input style={searchInputStyle} type='search' value={search} onChange={handleChange}/>
-      <button onClick={dispatchTheme} type='button' id='theme-icon'>
-        <img src={theme ? lightModeSvg : darkModeSvg}/>
-      </button>
+      <nav>
+        <button onClick={toggleAside} id='menu-bar' type='button' >
+          <Icon path={mdiMenu} size={1} color={colorTheme} />
+        </button>
+        <label style={labelStyle}>
+          <Icon path={mdiMagnify} size={1} color={colorTheme} />
+          <input type='search' value={search} style={searchInputStyle} onChange={handleChange}/>
+        </label>
+          <button onClick={dispatchTheme} type='button' id='theme-icon'>
+          <img src={theme ? lightModeSvg : darkModeSvg}/>
+        </button>
+      </nav>
     </header>
   );
 };

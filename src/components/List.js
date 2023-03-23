@@ -57,7 +57,7 @@ export default function List({ listObj }) {
   let mediumEmphasisColor = theme ? 'rgba(255,255,255,.6)' : 'black';
   let highEmphasisColor = theme ? 'rgba(255,255,255,.87' : 'black';
   let listBackground = theme ? '#333333' : 'white'; 
-  let listBorder = theme ? 'none' : '1px solid black';
+  let listBorder = theme ? '1px solid #333333' : '1px solid black';
   
   return (
     <li style={{
@@ -71,16 +71,7 @@ export default function List({ listObj }) {
         <h3 style={{color: highEmphasisColor}}>{listObj.title}</h3>
       </button>
       <span style={{color: mediumEmphasisColor}} className='amount-of-cells'>{listObj.cellList.length}</span>
-      <button
-        onClick={() => {
-          toggleDisplay()
-          dispatchListId(listObj.id )
-          }
-        }
-        ref={menu} >
-        <Icon path={mdiDotsVertical} size={1} color={highEmphasisColor} />
-      </button>
-      {displayMenu && <ListMenu toggleForm={toggleForm} removeList={removeList} listId={listObj.id} />}
+      <ListMenu removeList={removeList} listId={listObj.id} />
     </li>
   );
 };

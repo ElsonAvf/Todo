@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from '@mdi/react';
 
 import { useDispatchMainContentContext } from './contexts/MainContentContext.js';
 import { useDispatchListIdContext } from './contexts/ListIdContext.js';
@@ -22,10 +23,10 @@ export default function AsideList({ listId, title }) {
   }
   return (
     <li listid={listId}>
-      <button onClick={displayCells}
-      >
+      <button className='aside-list-btn' onClick={displayCells}>
         {title}
       </button>
+      <hr />
     </li>
   );
 };

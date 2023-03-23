@@ -1,8 +1,10 @@
 import React from 'react';
 
 import { useCellContext, useDispatchCellContext } from './contexts/CellFormContext.js';
+import { useThemeContext } from './contexts/ThemeContext.js';
 
 export default function PriorotyFieldset() {
+  const theme = useThemeContext();
   const cell = useCellContext();
   const dispatchCell = useDispatchCellContext();
   
@@ -14,10 +16,38 @@ export default function PriorotyFieldset() {
     })
   }
   
+  let lowStyle = {
+    color: theme ? 'lightgreen' : 'darkgreen',
+    border: theme ? '3px solid lightgreen' : '3px solid darkgreen',
+  };
+  let mediumStyle = {
+    color: '#FCAE1E',
+    border: '3px solid #FCAE1E',
+  };
+  let highStyle = {
+    color: 'tomato',
+    border: '3px solid tomato',
+  };
+  
+  switch (cell.priority) {
+    case 'low':
+      lowStyle.backgroundColor = theme ? 'lightgreen' : 'darkgreen';
+      lowStyle.color = theme ? '#222222' : 'white'
+      break;
+    case 'medium':
+      mediumStyle.backgroundColor = '#FCAE1E';
+      mediumStyle.color = theme ? '#222222' : 'white';
+      break;
+    case 'high':
+      highStyle.backgroundColor = 'tomato';
+      highStyle.color = theme ? '#222222' : 'white';
+      break;
+  }
+  
   return (
     <fieldset id='priority'>
       <legend>Priority</legend>
-      <label style={{color: 'green'}}>
+      <label style={lowStyle}>
         Low
         <input
           type='radio'
@@ -27,7 +57,7 @@ export default function PriorotyFieldset() {
           onChange={change}
       />
       </label>
-      <label style={{color: 'yellow'}}>
+      <label style={mediumStyle}>
         Medium
         <input
           type='radio'
@@ -37,7 +67,7 @@ export default function PriorotyFieldset() {
           onChange={change}
       />
       </label>
-      <label style={{color: 'red'}}>
+      <label style={highStyle}>
         High
         <input
           type='radio'

@@ -4,6 +4,7 @@ import { useDispatchMainContentContext } from './contexts/MainContentContext.js'
 import { useListIdContext, useDispatchListIdContext } from './contexts/ListIdContext.js';
 import { useTypeOfSubmitContext } from './contexts/TypeOfSubmitContext.js';
 import { useDispatchToggleFormContext } from './contexts/ToggleFormContext.js';
+import { useThemeContext } from './contexts/ThemeContext.js';
 
 import { addList, updateListTitle, getListById } from './../model/listStorageHandler.js';
 import List from './../model/list';
@@ -12,6 +13,7 @@ import './../assets/css/ListForm.css';
 
 export default function ListForm() {
   const listId = useListIdContext();
+  const theme = useThemeContext();
   const toggleForm = useDispatchToggleFormContext();
   const dispatchListId = useDispatchListIdContext();
   const initialTitle = listId ? getListById(listId).title : ''
@@ -38,10 +40,14 @@ export default function ListForm() {
     toggleForm()
   }
   
+  let background = {backgroundColor: theme ? '#333333' : 'white'}
+  let color= { color: theme ? 'white' : 'black'}
+  
   return (
-    <div id='list-form-container'>
-      <form id='list-form' onSubmit={handleSubmit}>
+    <div id='list-form-container' >
+      <form id='list-form' style={background} onSubmit={handleSubmit}>
         <input
+          style={color}
           onChange={handleChange}
           value={title}
           placeholder='Title'
@@ -50,8 +56,10 @@ export default function ListForm() {
           maxLength='20'
           required
         />
-        <button type='button' onClick={cancel}>Cancel</button>
-        <button type='submit'>Ok</button>
+        <div id='form-action-buttons'>
+          <button type='button' style={color} onClick={cancel}>Cancel</button>
+          <button type='submit' style={color}>Save</button>
+        </div>
       </form>
     </div>
   );

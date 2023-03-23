@@ -1,4 +1,4 @@
-import { isToday, isThisWeek, parseISO } from 'date-fns';
+import { format, isToday, isThisWeek, parseISO } from 'date-fns';
 
 import { getAllLists } from './listStorageHandler.js';
 

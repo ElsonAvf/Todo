@@ -8,27 +8,51 @@
   position: absolute;
   inset: 0;
   margin: auto;
-  height: 400px;
-  width: min(80%, 500px);
-  padding: 20px;
+  height: 450px;
+  width: min(80%, 420px);
+  padding: 15px 10px;
+  border-radius: 6px;
   display: grid;
+  grid-template-columns: 1fr;
   grid-template-rows: repeat(4, auto) 1fr auto;
-  justify-content: center;
+  justify-items: center;
+  gap: 12px;
 }
-#prioriry {
+#cell-form > input[type='text'] {
+  justify-self: stretch;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  outline: none;
+}
+#priority {
   width: 90%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 #priority input[type='radio'] {
   appearance: none;
 }
-#priority label:nth-child(2) {
-  border: 1px solid green;
+#priority > label {
+  width: 77px;
+  border-radius: 6px;
+  padding: 1px 0;
+  text-align: center;
+  font-weight: bold;
 }
-#priority label:nth-child(3) {
-  border: 1px solid yellow;
+#date-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
-#priority label:nth-child(4) {
-  border: 1px solid red;
+#cell-form > textarea {
+  justify-self: stretch;
+  outline: none;
+  resize: none;
+}
+#cell-form > #action-buttons {
+  justify-self: stretch;
+  display: flex;
+  justify-content: space-around;
 }

@@ -2,10 +2,9 @@ import React from 'react';
 
 import uniqid from 'uniqid'
 
-import { TypeOfCellSubmitProvider } from './TypeOfCellSubmitContext.js';
+import { TypeOfSubmitProvider } from './TypeOfSubmitContext.js';
 
-import { addCell, insertInTheSameIndex, getCellById } from './../../model/cellStorageHandler.js';
-import Cell from './../../model/cell.js';
+import { getCellById } from './../../model/cellStorageHandler.js';
 
 const CellContext = React.createContext(null);
 const DispatchCellContext = React.createContext(null);
@@ -102,9 +101,9 @@ export function CellFormProvider({ children }) {
   return (
     <CellContext.Provider value={ cell }>
       <DispatchCellContext.Provider value={ dispatchCell }>
-        <TypeOfCellSubmitProvider>
+        <TypeOfSubmitProvider>
           { children }
-        </TypeOfCellSubmitProvider>
+        </TypeOfSubmitProvider>
       </DispatchCellContext.Provider>
     </CellContext.Provider>
   )
